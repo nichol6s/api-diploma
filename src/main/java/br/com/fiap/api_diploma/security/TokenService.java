@@ -1,6 +1,6 @@
 package br.com.fiap.api_diploma.security;
 
-import br.com.fiap.cp5.model.Usuario;
+import br.com.fiap.api_diploma.model.Usuario;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
