@@ -46,6 +46,37 @@ public class DiplomaService {
         return diplomaRepository.save(diploma);
     }
 
+    public Diploma update(UUID id, DiplomaRequestDTO dto) {
+        Diploma diploma = diplomaRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Diploma não encontrado"));
+
+        var diplomado = diplomadoRepository.findById(dto.diplomadoId())
+                .orElseThrow(() -> new ResourceNotFoundException("Diplomado não encontrado"));
+
+        var curso = cursoRepository.findById(dto.cursoId())
+                .orElseThrow(() -> new ResourceNotFoundException("Curso não encontrado"));
+
+        // Verifica se já existe outro diploma para o mesmo diplomado e curso
+        if (!diploma.getDiplomado().equals(diplomado) || !diploma.getCurso().equals(curso)) {
+            validarDiploma(diplomado, curso);
+        }
+
+        diploma.setDiplomado(diplomado);
+        diploma.setCurso(curso);
+        diploma.setDataConclusao(dto.dataConclusao());
+        diploma.setSexoReitor(dto.sexoReitor());
+        diploma.setNomeReitor(dto.nomeReitor());
+
+        return diplomaRepository.save(diploma);
+    }
+
+    public void delete(UUID id) {
+        Diploma diploma = diplomaRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Diploma não encontrado"));
+
+        diplomaRepository.delete(diploma);
+    }
+
     private void validarDiploma(Diplomado diplomado, Curso curso) {
         var diplomaExistente = diplomaRepository.findByDiplomadoAndCurso(diplomado, curso);
         if (diplomaExistente.isPresent()) {

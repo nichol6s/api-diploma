@@ -1,15 +1,16 @@
 package br.com.fiap.api_diploma.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.AllArgsConstructor;
+import lombok.*;
 import jakarta.validation.constraints.NotBlank;
 
-@Data
-@Entity
+@Getter
+@Setter
+@ToString
+@EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
+@Entity
 public class Diplomado {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

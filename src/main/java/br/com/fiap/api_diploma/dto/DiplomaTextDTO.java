@@ -2,10 +2,15 @@ package br.com.fiap.api_diploma.dto;
 
 import br.com.fiap.api_diploma.model.Diploma;
 import br.com.fiap.api_diploma.model.Sexo;
-import lombok.Data;
+import jakarta.persistence.Entity;
+import lombok.*;
+
 import java.time.format.DateTimeFormatter;
 
-@Data
+@Getter
+@Setter
+@ToString
+@EqualsAndHashCode
 public class DiplomaTextDTO {
     private String tituloReitor;
     private String cargoReitor;

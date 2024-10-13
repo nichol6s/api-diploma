@@ -38,4 +38,17 @@ public class DiplomaController {
     public ResponseEntity<List<Diploma>> getAll() {
         return ResponseEntity.ok(diplomaService.findAll());
     }
+
+    @PutMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<Diploma> update(@PathVariable UUID id, @RequestBody @Valid DiplomaRequestDTO diplomaDTO) {
+        return ResponseEntity.ok(diplomaService.update(id, diplomaDTO));
+    }
+
+    @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<Void> delete(@PathVariable UUID id) {
+        diplomaService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
 }

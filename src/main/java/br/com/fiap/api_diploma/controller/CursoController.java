@@ -28,4 +28,15 @@ public class CursoController {
     public ResponseEntity<List<Curso>> getAll() {
         return ResponseEntity.ok(cursoService.findAll());
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Curso> update(@PathVariable Long id, @RequestBody @Valid CursoRequestDTO cursoDTO) {
+        return ResponseEntity.ok(cursoService.update(id, cursoDTO));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        cursoService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
 }

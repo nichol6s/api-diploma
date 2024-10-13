@@ -28,4 +28,15 @@ public class DiplomadoController {
     public ResponseEntity<List<Diplomado>> getAll() {
         return ResponseEntity.ok(diplomadoService.findAll());
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Diplomado> update(@PathVariable Long id, @RequestBody @Valid DiplomadoRequestDTO diplomadoDTO) {
+        return ResponseEntity.ok(diplomadoService.update(id, diplomadoDTO));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        diplomadoService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
 }
